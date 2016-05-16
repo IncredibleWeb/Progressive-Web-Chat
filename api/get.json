@@ -1,0 +1,19 @@
+[{
+    "sender": "me",
+    "message": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel, deleniti"
+}, {
+    "sender": "me",
+    "message": "Sit amet, consectetur adipisicing elit."
+}, {
+    "sender": "Bob",
+    "message": "li"
+}, {
+    "sender": "me",
+    "message": "Adipisicing elit. Vel, boboni"
+}, {
+    "sender": "Bob",
+    "message": "Sit amet bolony. deleniti!!"
+}, {
+    "sender": "me",
+    "message": "Adipisicing bonobni"
+}]
