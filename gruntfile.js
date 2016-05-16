@@ -7,8 +7,8 @@ var vendorBundle = [
     "<%= paths.vendor %>/fastclick.js",
     "<%= paths.vendor %>/jquery.validate.min.js",
     "<%= paths.vendor %>/jquery.validate.unobtrusive.min.js",
-    "<%= paths.vendor %>/jquery.inview.js",
-    "<%= paths.vendor %>/jquery.incredible.hoverside.js",
+    "<%= paths.vendor %>/response.js",
+    "<%= paths.vendor %>/jquery.signalR-2.2.0.js",
 ];
 
 module.exports = function(grunt) {

@@ -25,17 +25,20 @@
     <div class="container">
         <div id="main" class="content">
             <ul class="message-list" data-bind="foreach: messages">
-                <li class="message" data-bind="css: senderClass ">
+                <li class="message" data-bind="css: sender ">
                     <p data-bind="html: message"></p>
                 </li>
             </ul>
         </div>
-        <div class="text-input content">
-            <input type="text" placeholder="Type a message..." />
-        </div>
+        <form class="text-input content" autocomplete="off">
+            <input type="text" id="message" placeholder="Type a message..." autocomplete="off" />
+            <input type="submit" class="sendMessage" value="&raquo;" disabled="disabled" />
+        </form>
     </div>
     <script src="/js/vendor/modernizr.min.js"></script>
     <script src="/js/build/vendor.min.js"></script>
+    <!-- SignalR hub -->
+    <script src="//progressivewebchat-signalr.azurewebsites.net/signalr/hubs"></script>
     <script src="/js/build/script.min.js"></script>
 </body>
 
