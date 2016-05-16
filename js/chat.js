@@ -16,7 +16,7 @@ function MessageService() {
     // retrieve all messages from the API
     self.get = function(params) {
         return $.ajax({
-            url: "/api/get.json",
+            url: "./api/get.json",
             type: "GET"
         });
     };
