@@ -8,7 +8,7 @@
 
     var vm = new ViewModel();
     $.extend($, {
-        vm: pageViewModel,
+        vm: vm,
     });
 
     $(function() {
