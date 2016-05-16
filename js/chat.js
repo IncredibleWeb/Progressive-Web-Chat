@@ -13,17 +13,6 @@ function MessageViewModel() {
 function MessageService() {
     var self = this;
 
-    // send a message to the API
-    self.send = function(params) {
-        return $.ajax({
-            url: "/api/send.json",
-            type: "POST",
-            data: {
-                message: params.message
-            }
-        });
-    };
-
     // retrieve all messages from the API
     self.get = function(params) {
         return $.ajax({
@@ -57,13 +46,6 @@ function MessageAdapter() {
 
 function MessageController(messageService, messageAdapter) {
     var self = this;
-
-    // return true if message is sent successfully
-    self.send = function(data) {
-        return messageService.send(data).then(function(response) {
-            return response.isSuccess;
-        });
-    };
 
     // return all messages from the API
     self.get = function(data) {
