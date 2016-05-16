@@ -13,6 +13,7 @@
 
     $(function() {
         FastClick.attach(document.body);
+        ko.applyBindings(vm);
     });
 
 })(jQuery);

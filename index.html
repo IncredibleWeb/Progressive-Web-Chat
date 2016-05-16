@@ -22,35 +22,17 @@
             <h3>Progressive Web Chat</h3>
         </div>
     </header>
-    <div id="main" class="content">
-        <ul class="message-list">
-            <li class="message recieve">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel, deleniti</p>
-            </li>
-            <li class="message recieve">
-                <p>Lorem ipsum dolor sit amet deleniti</p>
-            </li>
-            <li class="message send">
-                <p>Ii</p>
-            </li>
-            <li class="message recieve">
-                <p>Adipisicing elit. Vel, deleniti</p>
-            </li>
-            <li class="message send">
-                <p>Sit amet bolony.
-                    <br/> deleniti!!
-                </p>
-            </li>
-            <li class="message send">
-                <p>:)</p>
-            </li>
-            <li class="message recieve">
-                <p>Adipisicing deleniti</p>
-            </li>
-        </ul>
-    </div>
-    <div class="text-input content">
-    	<input type="text" placeholder="Type a message..." />
+    <div class="container">
+        <div id="main" class="content">
+            <ul class="message-list" data-bind="foreach: messages">
+                <li class="message" data-bind="css: senderClass ">
+                    <p data-bind="html: message"></p>
+                </li>
+            </ul>
+        </div>
+        <div class="text-input content">
+            <input type="text" placeholder="Type a message..." />
+        </div>
     </div>
     <script src="/js/vendor/modernizr.min.js"></script>
     <script src="/js/build/vendor.min.js"></script>
