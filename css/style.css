@@ -455,6 +455,10 @@ ul.message-list {
     background-color: #43D7D5;
 }
 
+.text-input .sendMessage[disabled] {
+    background-color: #999;
+}
+
 .clearfix:before,
 .clearfix:after {
     content: " ";
