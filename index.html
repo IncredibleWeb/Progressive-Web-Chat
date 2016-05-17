@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html class="js no-touchevents" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progressive Web Chat by Incredible Web</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <link href="./favicon.ico" rel="shortcut icon" type="image/x-icon">
+    <link async rel="stylesheet" href="./css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,600,300italic,600italic" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="./js/vendor/jquery.min.js"></script>
+    <!-- link to the manifest file -->
+    <link rel="manifest" href="./manifest.json">
+</head>
+
+<body>
+    <header>
+        <div class="content">
+            <h3>Progressive Web Chat</h3>
+        </div>
+    </header>
+    <div class="container">
+        <div id="main" class="content">
+            <ul class="message-list" data-bind="foreach: messages">
+                <li class="message" data-bind="css: sender ">
+                    <p data-bind="html: message"></p>
+                </li>
+            </ul>
+        </div>
+        <form class="text-input content" autocomplete="off">
+            <input type="text" id="message" placeholder="Type a message..." autocomplete="off" />
+            <input type="submit" class="sendMessage" value="&raquo;" disabled="disabled" />
+        </form>
+    </div>
+    <script src="./js/vendor/modernizr.min.js"></script>
+    <script src="./js/build/vendor.min.js"></script>
+    <!-- SignalR hub -->
+    <script src="//progressivewebchat-signalr.localhost/signalr/hubs"></script>
+    <script src="./js/build/script.min.js"></script>
+</body>
+
+</html>
