@@ -6,6 +6,9 @@
         self.messages = ko.observableArray([]);
     }
 
+    // using KnockoutJS pub/sub
+    var postbox = new ko.subscribable();
+
     var uid = getCookie("uid");
     // generate unique identifier
     if (!uid) {
@@ -17,7 +20,9 @@
     var vm = new ViewModel();
     $.extend($, {
         vm: vm,
-        uid: uid
+        uid: uid,
+        isPushEnabled: false,
+        postbox: postbox
     });
 
     $(function() {
@@ -29,8 +34,9 @@
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('./sw.js').then(function(reg) {
             console.log('Successfully registered service worker', reg);
+            initialisePush();
         }).catch(function(err) {
-            console.log('Error whilst registering service worker', err);
+            console.warn('Error whilst registering service worker', err);
         });
     }
 

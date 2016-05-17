@@ -39,7 +39,7 @@
             var response = objectStore.getAll();
 
             response.onerror = function(event) {
-                console.log("Error reading from IndexedDB");
+                console.warn("Error reading from IndexedDB");
                 deferred.resolve(null);
             };
 
@@ -66,7 +66,7 @@
             };
 
             transaction.onerror = function(event) {
-                console.log("Error adding", data);
+                console.warn("Error adding", data);
                 deferred.resolve(false);
             };
 
@@ -179,6 +179,8 @@
                     event.preventDefault();
                     // send the message to the server
                     $.connection.chatHub.server.send($.uid, $message.val());
+                    // send push notification
+                    $.postbox.notifySubscribers($message.val(), "pushNotification");
                     // clear the field
                     $message.val("");
                 });
