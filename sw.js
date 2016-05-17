@@ -35,3 +35,20 @@ self.addEventListener('fetch', function(event) {
         })
     );
 });
+
+self.addEventListener('push', function(event) {
+    console.log('Received a push message');
+
+    var title = 'New message.'; 
+    var body = 'You have received a new message.';
+    var icon = './launcher-icon-8x.png';
+    var tag = 'simple-push-demo-notification-tag';
+
+    event.waitUntil(
+        self.registration.showNotification(title, {
+            body: body,
+            icon: icon,
+            tag: tag
+        })
+    );
+});
