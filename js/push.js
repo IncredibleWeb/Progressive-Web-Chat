@@ -28,8 +28,21 @@ function initialisePush() {
                     return;
                 }
 
-                // TODO: keep your server in sync with the latest subscriptionId
-                // sendSubscriptionToServer(subscription);
+                // chrome
+                if (subscription.endpoint.indexOf('https://android.googleapis.com/gcm/send') === 0) {
+                    var endpointParts = subscription.endpoint.split('/');
+                    var registrationId = endpointParts[endpointParts.length - 1];
+                    if (registrationId) {
+                        // update the notification hub
+                        $.ajax({
+                            url: "http://progressivewebchat-signalr.localhost/notificationhub/add",
+                            type: "GET",
+                            data: { value: registrationId }
+                        });
+                    }
+                } else {
+                    // TODO: implentation for non-chrome devices
+                }
 
                 // Set your UI to show they have subscribed for  
                 $.isPushEnabled = true;
@@ -92,29 +105,30 @@ function initialisePush() {
         }
 
         // use a knockoutJS pub/sub to listen for requests for push notifications
+        // N.B. this should be done on the server side to not expose keys and multiple requests
         $.postbox.subscribe(function() {
             navigator.serviceWorker.ready.then(function(serviceWorkerRegistration) {
                 // retrieve the push manager subscription
                 serviceWorkerRegistration.pushManager.getSubscription().then(function(subscription) {
-                    // submit the push notification
-                    if (subscription.endpoint.indexOf('https://android.googleapis.com/gcm/send') === 0) {
-                        // chrome
-                        var endpointParts = subscription.endpoint.split('/');
-                        var registrationId = endpointParts[endpointParts.length - 1];
-
-                        // send the push notification to GCM
-                        $.ajax({
-                            type: "POST",
-                            url: "https://android.googleapis.com/gcm/send",
-                            contentType: 'application/json',
-                            beforeSend: function(request) {
-                                request.setRequestHeader("Authorization", "key=AIzaSyAF5MPpOxHAeaFJDgzoFg6TdjNiQuiaNoY");
-                            },
-                            data: "{\"registration_ids\":[\"" + registrationId + "\"]}"
-                        });
-                    } else {
-                        // TODO: implentation for non-chrome devices
-                    }
+                    // retrieve the registrationIds
+                    $.ajax({
+                        url: "http://progressivewebchat-signalr.localhost/notificationhub",
+                        type: "GET",
+                    }).then(function(response) {
+                        var data = JSON.parse(response);
+                        for (var i = data.length - 1; i >= 0; i--) {
+                            // send the push notification to GCM
+                            $.ajax({
+                                type: "POST",
+                                url: "https://android.googleapis.com/gcm/send",
+                                contentType: 'application/json',
+                                beforeSend: function(request) {
+                                    request.setRequestHeader("Authorization", "key=AIzaSyAF5MPpOxHAeaFJDgzoFg6TdjNiQuiaNoY");
+                                },
+                                data: "{\"registration_ids\":[\"" + data[i] + "\"]}"
+                            });
+                        }
+                    });
                 });
             });
 
